@@ -66,20 +66,27 @@ class Grid {
 	}
 
 	private:void findIntersections(Grid grid) {
+		int min = INT_MAX;
+
 		cout << "Intersections begin" << endl;
 		intersectionPoints.clear();
 		for (int i = 1; i < grid.gridPoints.size(); i++) {
 			cout << "Intersections " << i << endl;
 			for (int k = 1; k < gridPoints.size(); k++) {
 				if (gridPoints[k] == grid.gridPoints[i]) {
+					if ((i + k) < min) {
+						//Steps to intersection
+						min = i + k;
+					}
 					intersectionPoints.push_back(gridPoints[k]);
 				}
 			}
 		}
 		cout << "Intersections end" << endl;
+		cout << "Part 2 Min distance to intersection: " << min << endl;
 	}
 
-	void findIntersectionDistances(Grid grid) {
+	public:void findIntersectionDistances(Grid grid) {
 
 		findIntersections(grid);
 
@@ -102,7 +109,6 @@ class Grid {
 		farthestIntersectionPointDistance = max;
 		closestIntersectionPointDistance = min;
 
-		cout << "Close: " << closestIntersectionPointDistance << endl;
-		cout << "Far: " << farthestIntersectionPointDistance << endl;
+		cout << "Part 1 Min manhattan distance: " << closestIntersectionPointDistance << endl;
 	}
 };
